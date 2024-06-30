@@ -1,4 +1,8 @@
-﻿namespace Catalog.Api.Products.CreateProduct;
+﻿using BuildingBlocks.CQRS;
+using Catalog.Api.Models;
+using Marten;
+
+namespace Catalog.Api.Products.CreateProduct;
 
 public record CreateProducResult(Guid Id);
 public record CreateProductCommand(string Name, List<string> Category, string Description, string ImageFile, decimal Price) : ICommand<CreateProducResult>;
