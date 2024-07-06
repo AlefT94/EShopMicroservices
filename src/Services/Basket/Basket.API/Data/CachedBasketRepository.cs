@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
 using System.Text.Json;
-
 namespace Basket.API.Data;
 
 public class CachedBasketRepository(IBasketRepository repository, IDistributedCache cache) : IBasketRepository
@@ -14,13 +13,13 @@ public class CachedBasketRepository(IBasketRepository repository, IDistributedCa
 
         var basket = await repository.GetBasket(userName, cancellationToken);
         await cache.SetStringAsync(userName, JsonSerializer.Serialize(basket), cancellationToken);
+
         return basket;
     }
 
     public async Task<ShoppingCart> StoreBasket(ShoppingCart basket, CancellationToken cancellationToken = default)
     {
         await repository.StoreBasket(basket, cancellationToken);
-
         await cache.SetStringAsync(basket.UserName, JsonSerializer.Serialize(basket), cancellationToken);
 
         return basket;
