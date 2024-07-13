@@ -29,11 +29,11 @@ namespace Discount.Grpc.Migrations
 
             migrationBuilder.InsertData(
                 table: "Coupons",
-                columns: new[] { "Id", "Amount", "Description", "ProductName" },
+                columns: new[] { "Id", "Amount", "Description", "ProductName"},
                 values: new object[,]
                 {
-                    { 1, 0, "IPhone Discount", "Iphone X" },
-                    { 2, 0, "Samsung Discount", "Samsung 10" }
+                    { 1, 150, "IPhone Discount", "IPhone X" },
+                    { 2, 130, "Samsung Discount", "Samsung 10" }
                 });
         }
 
