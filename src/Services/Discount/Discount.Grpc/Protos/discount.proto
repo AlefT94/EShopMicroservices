@@ -8,6 +8,7 @@ package discount;
 service DiscountProtoService{
 	//Discount CRUD Operations
 	rpc GetDiscount(GetDiscountRequest) returns (CouponModel);
+	rpc GetDiscounts(EmptyRequest) returns (CuponModelList);
 	rpc CreateDiscount (CreateDiscountRequest) returns (CouponModel);
 	rpc UpdateDiscount (UpdateDiscountRequest) returns (CouponModel);
 	rpc DeleteDiscount (DeleteDiscountRequest) returns (DeleteDiscountResponse);
@@ -38,4 +39,10 @@ message DeleteDiscountRequest{
 
 message DeleteDiscountResponse{
 	bool success = 1;
+}
+
+message EmptyRequest {}
+
+message CuponModelList{
+    repeated CouponModel coupons = 1;
 }
