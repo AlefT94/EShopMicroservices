@@ -1,3 +1,4 @@
+using Discount.Grpc;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Caching.Distributed;
@@ -5,6 +6,8 @@ using Microsoft.Extensions.Caching.Distributed;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
+
+//Application Services
 var assembly = typeof(Program).Assembly;
 builder.Services.AddCarter();
 builder.Services.AddMediatR(config =>
@@ -14,6 +17,7 @@ builder.Services.AddMediatR(config =>
     config.AddOpenBehavior(typeof(LoggingBehavior<,>));
 });
 
+//Data Services
 builder.Services.AddValidatorsFromAssembly(assembly);
 
 builder.Services.AddMarten(opts =>
@@ -24,18 +28,28 @@ builder.Services.AddMarten(opts =>
 
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 builder.Services.Decorate<IBasketRepository, CachedBasketRepository>();
+
 builder.Services.AddStackExchangeRedisCache(opt =>
 {
     opt.Configuration = builder.Configuration.GetConnectionString("Redis");
     //opt.InstanceName = "Basket";
 });
 
-/*builder.Services.AddScoped<IBasketRepository>(provider =>
+//Grpc Services
+builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(opt =>
 {
-    var basketRepository = provider.GetService<IBasketRepository>();
-    return new CachedBasketRepository(basketRepository, provider.GetRequiredService<IDistributedCache>());
-});*/ //Other way to register decorators beside using Scrutor
+    opt.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]!);
+}).ConfigurePrimaryHttpMessageHandler(() =>
+{
+    var handle = new HttpClientHandler
+    {
+        ServerCertificateCustomValidationCallback =
+        HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+    };
+    return handle;
+});
 
+//Cross-Cutting Services
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
 builder.Services.AddHealthChecks()
