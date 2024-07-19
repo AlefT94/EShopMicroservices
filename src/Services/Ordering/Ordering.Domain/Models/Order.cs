@@ -1,8 +1,4 @@
-﻿using Ordering.Domain.Abastractions;
-using System.Net;
-using System.Net.Sockets;
-
-namespace Ordering.Domain.Models;
+﻿namespace Ordering.Domain.Models;
 
 public class Order : Aggregate<Guid>
 {
@@ -13,7 +9,7 @@ public class Order : Aggregate<Guid>
     public Address  ShippingAddress { get; private set; } = default!;
     public Address BillingAddress { get; private set; } = default!;
     public Payment Payment { get; private set; } = default!;
-    public OrderStatus Status { get; private set; } = OrderSatus.Pending!;
+    public OrderStatus Status { get; private set; } = OrderStatus.Pending!;
     public decimal TotalPrice
     {
         get => OrderItems.Sum(x => x.Price * x.Quantity);
