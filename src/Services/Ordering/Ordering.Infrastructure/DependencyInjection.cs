@@ -9,10 +9,10 @@ public static class DependencyInjection
     {
         var connectionString = configuration.GetConnectionString("Database");
 
-        /*Add services to the container.
-         * services.AddDbContext<ApplicationDbContext>(options =>
-         *  options.UserSqlServices(connectionString))
-         */
+        //Add services to the container.
+        services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlServer(connectionString));
+         
         return services;
     }
 }
