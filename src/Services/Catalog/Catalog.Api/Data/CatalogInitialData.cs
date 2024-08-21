@@ -11,177 +11,76 @@ public class CatalogInitialData : IInitialData
         if (await session.Query<Product>().AnyAsync())
             return;
 
-        //Maten UPSERT
+        // Marten UPSERT will cater for existing records
         session.Store<Product>(GetPreconfiguredProducts());
         await session.SaveChangesAsync();
     }
-    private static IEnumerable<Product> GetPreconfiguredProducts()
-    {
-        return new List<Product>
-        {
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Wireless Headphones",
-                Category = new List<string> { "Electronics", "Audio" },
-                Description = "Noise-cancelling wireless headphones with superior sound quality.",
-                ImageFile = "wireless_headphones.png",
-                Price = 199.99M
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "4K TV",
-                Category = new List<string> { "Electronics", "Home Entertainment" },
-                Description = "A 65-inch 4K TV with vibrant colors and deep blacks.",
-                ImageFile = "4k_tv.png",
-                Price = 1199.99M
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Gaming Console",
-                Category = new List<string> { "Electronics", "Gaming" },
-                Description = "A next-gen gaming console with immersive graphics and fast load times.",
-                ImageFile = "gaming_console.png",
-                Price = 499.99M
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Smartwatch",
-                Category = new List<string> { "Electronics", "Wearables" },
-                Description = "A sleek smartwatch with fitness tracking and notifications.",
-                ImageFile = "smartwatch.png",
-                Price = 149.99M
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Bluetooth Speaker",
-                Category = new List<string> { "Electronics", "Audio" },
-                Description = "A portable Bluetooth speaker with rich sound and deep bass.",
-                ImageFile = "bluetooth_speaker.png",
-                Price = 99.99M
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Digital Camera",
-                Category = new List<string> { "Electronics", "Photography" },
-                Description = "A compact digital camera with high resolution and optical zoom.",
-                ImageFile = "digital_camera.png",
-                Price = 299.99M
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Tablet",
-                Category = new List<string> { "Electronics", "Mobile" },
-                Description = "A versatile tablet with a vibrant display and powerful processor.",
-                ImageFile = "tablet.png",
-                Price = 349.99M
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Smart Thermostat",
-                Category = new List<string> { "Electronics", "Home Automation" },
-                Description = "A smart thermostat that helps you save energy and stay comfortable.",
-                ImageFile = "smart_thermostat.png",
-                Price = 199.99M
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Electric Toothbrush",
-                Category = new List<string> { "Personal Care", "Health" },
-                Description = "An electric toothbrush with multiple cleaning modes and a long battery life.",
-                ImageFile = "electric_toothbrush.png",
-                Price = 49.99M
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Fitness Tracker",
-                Category = new List<string> { "Electronics", "Wearables" },
-                Description = "A fitness tracker with heart rate monitoring and sleep tracking.",
-                ImageFile = "fitness_tracker.png",
-                Price = 79.99M
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "E-book Reader",
-                Category = new List<string> { "Electronics", "Mobile" },
-                Description = "An e-book reader with a high-resolution display and long battery life.",
-                ImageFile = "ebook_reader.png",
-                Price = 129.99M
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Robot Vacuum",
-                Category = new List<string> { "Home Appliances", "Cleaning" },
-                Description = "A robot vacuum that intelligently navigates and cleans your home.",
-                ImageFile = "robot_vacuum.png",
-                Price = 249.99M
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Air Purifier",
-                Category = new List<string> { "Home Appliances", "Health" },
-                Description = "An air purifier with HEPA filter to keep your indoor air clean.",
-                ImageFile = "air_purifier.png",
-                Price = 149.99M
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Smart Lock",
-                Category = new List<string> { "Electronics", "Home Security" },
-                Description = "A smart lock that allows you to control access to your home remotely.",
-                ImageFile = "smart_lock.png",
-                Price = 179.99M
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Drone",
-                Category = new List<string> { "Electronics", "Photography" },
-                Description = "A drone with a high-definition camera and stable flight capabilities.",
-                ImageFile = "drone.png",
-                Price = 399.99M
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "VR Headset",
-                Category = new List<string> { "Electronics", "Gaming" },
-                Description = "A VR headset that offers an immersive virtual reality experience.",
-                ImageFile = "vr_headset.png",
-                Price = 299.99M
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Instant Pot",
-                Category = new List<string> { "Home Appliances", "Kitchen" },
-                Description = "A versatile instant pot for quick and easy meal preparation.",
-                ImageFile = "instant_pot.png",
-                Price = 99.99M
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Espresso Machine",
-                Category = new List<string> { "Home Appliances", "Kitchen" },
-                Description = "An espresso machine that makes rich and flavorful coffee.",
-                ImageFile = "espresso_machine.png",
-                Price = 299.99M
-            }
 
-        };
-    }
+    private static IEnumerable<Product> GetPreconfiguredProducts() => new List<Product>()
+            {
+                new Product()
+                {
+                    Id = new Guid("5334c996-8457-4cf0-815c-ed2b77c4ff61"),
+                    Name = "IPhone X",
+                    Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
+                    ImageFile = "product-1.png",
+                    Price = 950.00M,
+                    Category = new List<string> { "Smart Phone" }
+                },
+                new Product()
+                {
+                    Id = new Guid("c67d6323-e8b1-4bdf-9a75-b0d0d2e7e914"),
+                    Name = "Samsung 10",
+                    Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
+                    ImageFile = "product-2.png",
+                    Price = 840.00M,
+                    Category = new List<string> { "Smart Phone" }
+                },
+                new Product()
+                {
+                    Id = new Guid("4f136e9f-ff8c-4c1f-9a33-d12f689bdab8"),
+                    Name = "Huawei Plus",
+                    Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
+                    ImageFile = "product-3.png",
+                    Price = 650.00M,
+                    Category = new List<string> { "White Appliances" }
+                },
+                new Product()
+                {
+                    Id = new Guid("6ec1297b-ec0a-4aa1-be25-6726e3b51a27"),
+                    Name = "Xiaomi Mi 9",
+                    Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
+                    ImageFile = "product-4.png",
+                    Price = 470.00M,
+                    Category = new List<string> { "White Appliances" }
+                },
+                new Product()
+                {
+                    Id = new Guid("b786103d-c621-4f5a-b498-23452610f88c"),
+                    Name = "HTC U11+ Plus",
+                    Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
+                    ImageFile = "product-5.png",
+                    Price = 380.00M,
+                    Category = new List<string> { "Smart Phone" }
+                },
+                new Product()
+                {
+                    Id = new Guid("c4bbc4a2-4555-45d8-97cc-2a99b2167bff"),
+                    Name = "LG G7 ThinQ",
+                    Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
+                    ImageFile = "product-6.png",
+                    Price = 240.00M,
+                    Category = new List<string> { "Home Kitchen" }
+                },
+                new Product()
+                {
+                    Id = new Guid("93170c85-7795-489c-8e8f-7dcf3b4f4188"),
+                    Name = "Panasonic Lumix",
+                    Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
+                    ImageFile = "product-6.png",
+                    Price = 240.00M,
+                    Category = new List<string> { "Camera" }
+                }
+            };
+
 }
