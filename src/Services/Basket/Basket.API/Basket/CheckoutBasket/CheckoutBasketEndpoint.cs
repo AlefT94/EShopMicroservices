@@ -27,6 +27,7 @@ public class CheckoutBasketEndpoint : ICarterModule
                     CardName = request.BasketCheckoutDto.CardName,
                     CardNumber = request.BasketCheckoutDto.CardNumber,
                     CVV = request.BasketCheckoutDto.CVV,
+                    Expiration = request.BasketCheckoutDto.Expiration,
                     PaymentMethod = request.BasketCheckoutDto.PaymentMethod
                 });
 
