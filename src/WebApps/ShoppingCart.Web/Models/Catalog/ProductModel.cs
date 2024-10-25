@@ -11,6 +11,6 @@ public class ProductModel
 }
 
 //wrapper classes
-public record GetproductsResponse(IEnumerable<ProductModel> Products);
+public record GetProductsResponse(IEnumerable<ProductModel> Products);
 public record GetProductByCategoryResponse(IEnumerable<ProductModel> Products);
 public record GetProductByIdResponse(ProductModel Product);
