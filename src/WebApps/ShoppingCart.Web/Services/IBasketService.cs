@@ -1,4 +1,6 @@
-﻿namespace ShoppingCart.Web.Services;
+﻿using System.Net;
+
+namespace ShoppingCart.Web.Services;
 
 public interface IBasketService
 {
@@ -13,4 +15,27 @@ public interface IBasketService
 
     [Post("/basket-service/basket/checkou")]
     Task<CheckoutBasketResponse> CheckoutBasket(CheckoutBasketRequest request);
+
+    public async Task<ShoppingCartModel> LoadUserBasket()
+    {
+        // get Basket it not exists create new basket with default logged in User name
+        var userName = "alef";
+        ShoppingCartModel basket;
+
+        try
+        {
+            var getBasketResponse = await GetBasket(userName);
+            basket = getBasketResponse.Cart;
+        }
+        catch (ApiException apiException) when (apiException.StatusCode == HttpStatusCode.NotFound)
+        {
+            basket = new ShoppingCartModel
+            {
+                UserName = userName,
+                Items = []
+            };
+        }
+
+        return basket;
+    }
 }
