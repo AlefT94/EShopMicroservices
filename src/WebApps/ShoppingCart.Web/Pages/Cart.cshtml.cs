@@ -1,6 +1,6 @@
 namespace ShoppingCart.Web.Pages
 {
-    public class CartModel (IBasketService basketService, ILogger logger)
+    public class CartModel (IBasketService basketService, ILogger<CartModel> logger)
         : PageModel
     {
         public ShoppingCartModel Cart { get; set; } = new ShoppingCartModel();
